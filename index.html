@@ -30,6 +30,13 @@
     <nav class="nav" id="nav">
         <div class="nav-container">
             <a href="#hero" class="nav-logo">EX</a>
+            <div class="nav-links">
+                <!-- Edit links as needed -->
+                <a href="#about" class="nav-link">About</a>
+                <a href="#now" class="nav-link">Currently</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
             <div class="theme-toggle-container">
                 <svg class="theme-icon sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="5"/>
@@ -49,11 +56,11 @@
 
     <!-- Section Indicator -->
     <div class="section-indicator" id="sectionIndicator">
-        <div class="indicator-dot active" data-section="hero"></div>
-        <div class="indicator-dot" data-section="about"></div>
-        <div class="indicator-dot" data-section="now"></div>
-        <div class="indicator-dot" data-section="projects"></div>
-        <div class="indicator-dot" data-section="contact"></div>
+        <div class="indicator-dot active" data-section="hero" data-label="Hero"></div>
+        <div class="indicator-dot" data-section="about" data-label="About"></div>
+        <div class="indicator-dot" data-section="now" data-label="Currently"></div>
+        <div class="indicator-dot" data-section="projects" data-label="Projects"></div>
+        <div class="indicator-dot" data-section="contact" data-label="Contact"></div>
     </div>
 
     <!-- Hero Section -->
@@ -81,16 +88,15 @@
     <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About</h2>
-            </div>
-            <div class="about-content">
-                <p class="about-text">I'm a passionate software engineer and AI/ML enthusiast with a love for creating
-                    elegant solutions to complex problems. My journey in tech started with curiosity about how things
-                    work, and has evolved into a deep appreciation for well-crafted software that makes people's lives
-                    better.</p>
-                <p class="about-text">Currently seeking internship opportunities where I can contribute to innovative
-                    projects and continue learning from experienced teams.</p>
+            <div class="glass-block">
+                <div class="section-header">
+                    <h2 class="section-title">About</h2>
+                </div>
+                <div class="about-content">
+                    <!-- TODO: Replace with your own About content -->
+                    <p class="about-text">[About placeholder] Brief intro about you, your passions, and your focus areas.</p>
+                    <p class="about-text">[About placeholder] What you're looking for (e.g., internships, roles) and what excites you.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -190,11 +196,13 @@
     <!-- Now Section -->
     <section class="now" id="now">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Currently</h2>
-            </div>
-            <div class="now-list" id="nowList">
-                <!-- Now items will be populated by JavaScript -->
+            <div class="glass-block">
+                <div class="section-header">
+                    <h2 class="section-title">Currently</h2>
+                </div>
+                <div class="now-list" id="nowList">
+                    <!-- Now items will be populated by JavaScript -->
+                </div>
             </div>
         </div>
     </section>
@@ -232,18 +240,20 @@
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Get in Touch</h2>
-            </div>
-            <div class="contact-content">
-                <p class="contact-text">I'm always interested in hearing about new opportunities and connecting with
-                    fellow developers.</p>
-                <div class="contact-links">
-                    <a href="mailto:eric@example.com" class="contact-link">Email</a>
-                    <a href="https://github.com/ericxu" class="contact-link" target="_blank" rel="noopener">GitHub</a>
-                    <a href="https://linkedin.com/in/ericxu" class="contact-link" target="_blank"
-                        rel="noopener">LinkedIn</a>
-                    <a href="/resume.pdf" class="contact-link" target="_blank" rel="noopener">Resume</a>
+            <div class="glass-block">
+                <div class="section-header">
+                    <h2 class="section-title">Get in Touch</h2>
+                </div>
+                <div class="contact-content">
+                    <!-- TODO: Replace with your contact content/links -->
+                    <p class="contact-text">[Contact placeholder] Let visitors know how to reach you.</p>
+                    <div class="contact-links">
+                        <a href="mailto:eric@example.com" class="contact-link">Email</a>
+                        <a href="https://github.com/ericxu" class="contact-link" target="_blank" rel="noopener">GitHub</a>
+                        <a href="https://linkedin.com/in/ericxu" class="contact-link" target="_blank"
+                            rel="noopener">LinkedIn</a>
+                        <a href="/resume.pdf" class="contact-link" target="_blank" rel="noopener">Resume</a>
+                    </div>
                 </div>
             </div>
         </div>

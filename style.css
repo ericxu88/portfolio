@@ -53,23 +53,23 @@
   --color-bg: #1a1a1a;
   --color-bg-secondary: #242424;
   --color-bg-tertiary: #2e2e2e;
-  --color-text: #f5f2ed;
-  --color-text-secondary: #b8b8b8;
-  --color-text-tertiary: #8a8a8a;
-  --color-accent: #c4a882;
-  --color-accent-hover: #d4b892;
-  --color-accent-light: rgba(196, 168, 130, 0.15);
+  --color-text: #efe9df; /* warm beige text */
+  --color-text-secondary: #c9c1b4;
+  --color-text-tertiary: #a79e90;
+  --color-accent: #c9b08a; /* beige-gold accent */
+  --color-accent-hover: #d9c29e;
+  --color-accent-light: rgba(201, 176, 138, 0.18);
   --color-border: rgba(245, 242, 237, 0.08);
   --color-border-hover: rgba(245, 242, 237, 0.16);
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-shadow-hover: rgba(0, 0, 0, 0.5);
   
   /* Dark theme glass overrides */
-  --glass-bg: rgba(26, 26, 26, 0.35);
-  --glass-border: rgba(245, 242, 237, 0.12);
-  --glass-shadow: rgba(0, 0, 0, 0.35);
-  --glass-bg-strong: rgba(26, 26, 26, 0.48);
-  --glass-stroke-highlight: rgba(255, 255, 255, 0.18);
+  --glass-bg: rgba(30, 28, 25, 0.35);
+  --glass-border: rgba(239, 233, 223, 0.12);
+  --glass-shadow: rgba(0, 0, 0, 0.4);
+  --glass-bg-strong: rgba(30, 28, 25, 0.5);
+  --glass-stroke-highlight: rgba(255, 245, 230, 0.14);
   --glass-stroke-shadow: rgba(0, 0, 0, 0.35);
 }
 
@@ -247,6 +247,23 @@ p {
   height: 80px;
 }
 
+.nav-links {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.nav-link {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.nav-link:hover {
+  color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
 .nav-logo {
   font-family: var(--font-serif);
   font-weight: 600;
@@ -342,27 +359,29 @@ p {
 }
 
 .indicator-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--glass-bg);
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, var(--glass-bg-strong), var(--glass-bg));
   border: 1px solid var(--glass-border);
   cursor: pointer;
   transition: all var(--transition-base);
-  backdrop-filter: blur(8px) saturate(120%);
-  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), 0 6px 18px var(--glass-shadow);
+  position: relative;
 }
 
 .indicator-dot.active {
-  background: var(--glass-bg-strong);
+  background: linear-gradient(180deg, var(--color-accent-light), var(--glass-bg-strong));
   border-color: var(--color-accent);
-  transform: scale(1.2);
-  box-shadow: 0 0 20px var(--color-accent);
+  transform: scale(1.25);
+  box-shadow: 0 0 24px var(--color-accent);
 }
 
 .indicator-dot:hover {
-  background: var(--color-accent);
-  transform: scale(1.1);
+  background: linear-gradient(180deg, var(--color-accent-light), var(--glass-bg));
+  transform: scale(1.12);
 }
 
 @media (max-width: 768px) {
@@ -851,6 +870,17 @@ section {
   text-shadow: 0 0 20px var(--color-accent);
 }
 
+/* Glass-block wrapper */
+.glass-block {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: var(--space-2xl);
+  box-shadow: 0 20px 60px var(--glass-shadow);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
 @media (max-width: 768px) {
   .contact-links {
     flex-direction: column;
@@ -921,8 +951,10 @@ section {
 .terminal-badge {
   font-family: 'SF Mono', monospace;
   font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  font-weight: 800;
+  letter-spacing: 0.9px;
+  color: var(--color-text);
+  text-shadow: 0 1px 2px var(--glass-shadow);
 }
 
 @keyframes terminalPulse {

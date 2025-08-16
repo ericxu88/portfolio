@@ -1,66 +1,47 @@
 // Data
+// Edit these placeholders with your current focus
 const nowData = [
-  {
-    emoji: "🤖",
-    title: "Building AI-powered Code Assistant",
-    description: "Developing a VS Code extension that uses machine learning to provide intelligent code suggestions.",
-    date: "Dec 2024"
-  },
-  {
-    emoji: "📚",
-    title: "Learning Advanced System Design",
-    description: "Deep diving into distributed systems and scalability patterns through hands-on projects.",
-    date: "Nov 2024"
-  },
-  {
-    emoji: "🎵",
-    title: "Music Production with AI",
-    description: "Experimenting with neural networks for music generation and collaborative creation tools.",
-    date: "Oct 2024"
-  },
-  {
-    emoji: "🌱",
-    title: "Contributing to Open Source",
-    description: "Actively contributing to React ecosystem projects and maintaining TypeScript utilities.",
-    date: "Sep 2024"
-  }
+  { emoji: "🧭", title: "[Currently Placeholder #1]", description: "Describe what you're focused on right now.", date: "[Month YYYY]" },
+  { emoji: "🛠️", title: "[Currently Placeholder #2]", description: "Another current initiative or learning area.", date: "[Month YYYY]" },
+  { emoji: "📈", title: "[Currently Placeholder #3]", description: "Progress, metrics, or outcomes you're tracking.", date: "[Month YYYY]" }
 ];
 
+// Edit these placeholders with your projects
 const projectsData = [
   {
     id: 1,
-    title: "AI Code Assistant",
-    description: "Intelligent VS Code extension that provides contextual code suggestions and automated refactoring using machine learning.",
-    icon: "🤖",
-    tech: ["TypeScript", "Python", "OpenAI API", "VS Code API"],
-    github: "https://github.com/ericxu/ai-code-assistant",
-    demo: "https://marketplace.visualstudio.com/items?itemName=ericxu.ai-assistant"
+    title: "[Project Title 1]",
+    description: "Short one-liner about what the project does and why it matters.",
+    icon: "✨",
+    tech: ["Tech A", "Tech B", "Tech C"],
+    github: "https://github.com/your-handle/your-repo",
+    demo: "https://your-demo-link.example.com"
   },
   {
     id: 2,
-    title: "Real-time Collaboration Hub",
-    description: "Figma-inspired design platform with live multiplayer editing, voice chat, and seamless version control.",
-    icon: "🎨",
-    tech: ["Next.js", "WebRTC", "Socket.io", "Canvas API"],
-    github: "https://github.com/ericxu/collab-hub",
-    demo: "https://collab-hub.ericxu.dev"
+    title: "[Project Title 2]",
+    description: "Key functionality or outcome. Keep it concise and impactful.",
+    icon: "🚀",
+    tech: ["Tech A", "Tech B"],
+    github: "https://github.com/your-handle/your-repo",
+    demo: null
   },
   {
     id: 3,
-    title: "Smart Fitness Tracker",
-    description: "iOS app with AI-powered workout recommendations and HealthKit integration. Featured in App Store.",
-    icon: "💪",
-    tech: ["Swift", "SwiftUI", "HealthKit", "Core ML"],
-    github: "https://github.com/ericxu/smart-fitness",
-    demo: "https://apps.apple.com/app/smart-fitness-tracker"
+    title: "[Project Title 3]",
+    description: "What makes it unique or interesting.",
+    icon: "📱",
+    tech: ["Tech A", "Tech B"],
+    github: "https://github.com/your-handle/your-repo",
+    demo: null
   },
   {
     id: 4,
-    title: "MLOps Pipeline",
-    description: "Scalable machine learning deployment system handling 1M+ daily predictions with automated monitoring.",
-    icon: "⚡",
-    tech: ["Python", "TensorFlow", "Docker", "Kubernetes"],
-    github: "https://github.com/ericxu/mlops-pipeline",
+    title: "[Project Title 4]",
+    description: "Brief value proposition and scope.",
+    icon: "🧠",
+    tech: ["Tech A", "Tech B", "Tech C"],
+    github: "https://github.com/your-handle/your-repo",
     demo: null
   }
 ];
@@ -574,6 +555,8 @@ class InteractiveTerminal {
 
     this.setupEventListeners();
     this.setupWidgetControls();
+    // Cache prompt element in the input line for accurate cursor positioning
+    this.promptEl = document.querySelector('.terminal-input-line .terminal-prompt');
     this.updateCursorPosition();
   }
 
@@ -680,9 +663,9 @@ class InteractiveTerminal {
   }
 
   updateCursorPosition() {
-    const inputRect = this.input.getBoundingClientRect();
     const textWidth = this.getTextWidth(this.input.value, this.input);
-    this.cursor.style.left = `${textWidth + 8}px`;
+    const baseLeft = this.input ? this.input.offsetLeft : 0; // start at input field left edge
+    this.cursor.style.left = `${baseLeft + textWidth}px`;
   }
 
   getTextWidth(text, element) {
