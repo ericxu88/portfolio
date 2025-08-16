@@ -1,0 +1,51 @@
+{
+  "name": "eric-xu-portfolio",
+  "version": "1.0.0",
+  "description": "Eric Xu's personal portfolio website - Building delightful, reliable software",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "serve": "python -m http.server 8000",
+    "build": "echo 'No build step required for vanilla HTML/CSS/JS'",
+    "deploy": "echo 'Deploy to your preferred hosting platform'",
+    "lighthouse": "lighthouse http://localhost:8000 --output html --output-path ./lighthouse-report.html",
+    "validate": "html-validate index.html",
+    "optimize": "imagemin assets/*.{jpg,png} --out-dir=assets/optimized"
+  },
+  "keywords": [
+    "portfolio",
+    "personal-website",
+    "developer",
+    "software-engineer",
+    "ai-ml",
+    "responsive",
+    "accessibility",
+    "performance"
+  ],
+  "author": {
+    "name": "Eric Xu",
+    "email": "eric@example.com",
+    "url": "https://ericxu.dev"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ericxu/portfolio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ericxu/portfolio/issues"
+  },
+  "homepage": "https://ericxu.dev",
+  "devDependencies": {
+    "lighthouse": "^11.4.0",
+    "html-validate": "^8.7.4",
+    "imagemin": "^8.0.1",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^9.0.2"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

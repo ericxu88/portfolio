@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eric Xu</title>
+    <meta name="description" content="Software Engineer & AI/ML Developer building delightful, reliable software.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Liquid Glass Background -->
+    <div class="liquid-bg" aria-hidden="true">
+        <span class="blob b1"></span>
+        <span class="blob b2"></span>
+        <span class="blob b3"></span>
+        <span class="blob b4"></span>
+    </div>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">EX</a>
+            <div class="theme-toggle-container">
+                <svg class="theme-icon sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"/>
+                    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                </svg>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <div class="toggle-track">
+                        <div class="toggle-thumb"></div>
+                    </div>
+                </button>
+                <svg class="theme-icon moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Section Indicator -->
+    <div class="section-indicator" id="sectionIndicator">
+        <div class="indicator-dot active" data-section="hero"></div>
+        <div class="indicator-dot" data-section="about"></div>
+        <div class="indicator-dot" data-section="now"></div>
+        <div class="indicator-dot" data-section="projects"></div>
+        <div class="indicator-dot" data-section="contact"></div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-name">Eric Xu</h1>
+                    <p class="hero-tagline">Building delightful, reliable software</p>
+                </div>
+
+                <!-- Tech Stack -->
+                <div class="tech-stack">
+                    <span class="tech-chip">React</span>
+                    <span class="tech-chip">TypeScript</span>
+                    <span class="tech-chip">Python</span>
+                    <span class="tech-chip">Node.js</span>
+                    <span class="tech-chip">PostgreSQL</span>
+                    <span class="tech-chip">AWS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">About</h2>
+            </div>
+            <div class="about-content">
+                <p class="about-text">I'm a passionate software engineer and AI/ML enthusiast with a love for creating
+                    elegant solutions to complex problems. My journey in tech started with curiosity about how things
+                    work, and has evolved into a deep appreciation for well-crafted software that makes people's lives
+                    better.</p>
+                <p class="about-text">Currently seeking internship opportunities where I can contribute to innovative
+                    projects and continue learning from experienced teams.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Terminal Widget -->
+    <div class="terminal-widget" id="terminalWidget">
+        <button class="terminal-toggle" id="terminalToggle" title="Open Interactive Terminal">
+            <svg class="terminal-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="4,17 10,11 4,5"></polyline>
+                <line x1="12" y1="19" x2="20" y2="19"></line>
+            </svg>
+            <span class="terminal-badge">CLI</span>
+        </button>
+        
+        <div class="terminal-overlay" id="terminalOverlay">
+            <div class="terminal-modal">
+                <div class="terminal-window">
+                    <div class="terminal-header">
+                        <div class="terminal-controls">
+                            <div class="control-dot red" id="terminalClose"></div>
+                            <div class="control-dot yellow" id="terminalMinimize"></div>
+                            <div class="control-dot green" id="terminalMaximize"></div>
+                        </div>
+                        <div class="terminal-title">eric@portfolio:~$</div>
+                        <div class="terminal-actions">
+                            <button class="sound-toggle" id="soundToggle" title="Toggle sound effects">
+                                <svg class="sound-on" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                                </svg>
+                                <svg class="sound-off" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                    <line x1="23" y1="9" x2="17" y2="15"></line>
+                                    <line x1="17" y1="9" x2="23" y2="15"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="terminal-body" id="terminalBody">
+                        <div class="terminal-output" id="terminalOutput">
+                            <div class="terminal-line">
+                                <span class="terminal-ascii">
+    ╭─────────────────────────────────╮
+    │   Welcome to Eric's Portfolio   │
+    │        Interactive CLI          │
+    ╰─────────────────────────────────╯
+                                </span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-success">Terminal initialized successfully!</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-text">Explore my portfolio through the command line interface.</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-text"></span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-info">Quick Start Commands:</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-text">  • <span class="command-highlight">whoami</span>     - Learn about me</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-text">  • <span class="command-highlight">skills --list</span> - View my technical skills</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-text">  • <span class="command-highlight">git log --oneline</span> - See my projects</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-text">  • <span class="command-highlight">contact --info</span> - Get my contact info</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-text">  • <span class="command-highlight">help</span>       - Show all commands</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-text"></span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-warning">Pro Tips: Use ↑↓ for history, Tab for autocomplete, Ctrl+L to clear</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-text"></span>
+                            </div>
+                        </div>
+                        <div class="terminal-input-line">
+                            <span class="terminal-prompt">eric@portfolio:~$</span>
+                            <input type="text" class="terminal-input" id="terminalInput" autocomplete="off" spellcheck="false" placeholder="Type a command...">
+                            <span class="terminal-cursor" id="terminalCursor">█</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Now Section -->
+    <section class="now" id="now">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Currently</h2>
+            </div>
+            <div class="now-list" id="nowList">
+                <!-- Now items will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="projects">
+        <div class="projects-container">
+            <div class="projects-header">
+                <h2 class="projects-title">Selected Work</h2>
+                <p class="projects-subtitle">Innovative solutions across web, mobile, and AI</p>
+            </div>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be populated by JavaScript -->
+                <!-- Temporary fallback for debugging -->
+                <div class="project-card" style="background: red; color: white; padding: 20px;">
+                    <h3>Test Project 1</h3>
+                    <p>If you can see this, the CSS is working</p>
+                </div>
+                <div class="project-card" style="background: blue; color: white; padding: 20px;">
+                    <h3>Test Project 2</h3>
+                    <p>If you can see this, the CSS is working</p>
+                </div>
+                <div class="project-card" style="background: green; color: white; padding: 20px;">
+                    <h3>Test Project 3</h3>
+                    <p>If you can see this, the CSS is working</p>
+                </div>
+                <div class="project-card" style="background: purple; color: white; padding: 20px;">
+                    <h3>Test Project 4</h3>
+                    <p>If you can see this, the CSS is working</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get in Touch</h2>
+            </div>
+            <div class="contact-content">
+                <p class="contact-text">I'm always interested in hearing about new opportunities and connecting with
+                    fellow developers.</p>
+                <div class="contact-links">
+                    <a href="mailto:eric@example.com" class="contact-link">Email</a>
+                    <a href="https://github.com/ericxu" class="contact-link" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://linkedin.com/in/ericxu" class="contact-link" target="_blank"
+                        rel="noopener">LinkedIn</a>
+                    <a href="/resume.pdf" class="contact-link" target="_blank" rel="noopener">Resume</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
