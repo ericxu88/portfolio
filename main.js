@@ -1,9 +1,15 @@
 // Data
-// Edit these placeholders with your current focus
+// Current focus items
 const nowData = [
-  { emoji: "🧭", title: "[Currently Placeholder #1]", description: "Describe what you're focused on right now.", date: "[Month YYYY]" },
-  { emoji: "🛠️", title: "[Currently Placeholder #2]", description: "Another current initiative or learning area.", date: "[Month YYYY]" },
-  { emoji: "📈", title: "[Currently Placeholder #3]", description: "Progress, metrics, or outcomes you're tracking.", date: "[Month YYYY]" }
+  { emoji: "🧠", id: 'relay', title: "Building Relay", description: "“The Git for Cognition.”"},
+  { emoji: "💊", id: 'drfirst', title: "Interning at DrFirst", description: "Optimizing e‑prescription workflows"},
+  { emoji: "🍳", id: 'food', title: "Exploring new recipes", description: "Trying Food Network dishes"},
+  { emoji: "📚", id: 'courses', title: "Currently taking", courses: [
+      "CSCI2470: Deep Learning (graduate)",
+      "CSCI0410: Foundations of AI",
+      "CSCI1951L: Blockchains and Cryptocurrencies",
+      "APMA1170: Computational Linear Algebra"
+    ]}
 ];
 
 // Edit these placeholders with your projects
@@ -162,21 +168,118 @@ class NowSection {
   constructor() {
     this.container = document.getElementById('nowList');
     this.render();
+    this.setupCourseRotators();
+    this.startSlideshow();
   }
 
   render() {
     if (!this.container) return;
-
-    this.container.innerHTML = nowData.map(item => `
+    const existingSlider = document.getElementById('nowSlider');
+    const itemsHtml = nowData.map((item) => {
+      const hasCourses = Array.isArray(item.courses) && item.courses.length > 0;
+      const coursesData = hasCourses ? ` data-courses='${JSON.stringify(item.courses)}'` : '';
+      const coursesBlock = hasCourses
+        ? `<div class="course-rotator"${coursesData}><span class="course-text"></span></div>`
+        : '';
+      const desc = item.description ? `<p>${item.description}</p>` : '';
+      return `
       <div class="now-item">
-        <div class="now-emoji">${item.emoji}</div>
         <div class="now-content">
-          <h3>${item.title}</h3>
-          <p>${item.description}</p>
-          <div class="now-date">${item.date}</div>
+          <h3 class="now-title"><em>${item.title}</em></h3>
+          ${desc}
+          ${coursesBlock}
         </div>
+      </div>`;
+    }).join('');
+    const sliderHtml = existingSlider ? existingSlider.outerHTML : '<div class="now-slider" id="nowSlider"></div>';
+    this.container.innerHTML = sliderHtml + itemsHtml;
+    // Ensure the new items are visible immediately
+    this.container.querySelectorAll('.now-item').forEach(el => el.classList.add('visible'));
+  }
+
+  startSlideshow() {
+    const visualHost = document.querySelector('.current-visual');
+    if (!visualHost) return;
+
+    // Create visual cards for relay, drfirst, food
+    const visuals = [
+      { id: 'relay', className: 'visual-relay', label: 'Relay' },
+      { id: 'drfirst', className: 'visual-drfirst', label: 'DrFirst' },
+      { id: 'food', className: 'visual-food', label: 'Food' }
+    ];
+
+    visualHost.innerHTML = visuals.map((v, i) => `
+      <div class="visual-card ${v.className} ${i === 0 ? 'active' : ''}">
+        <div class="visual-caption">${v.label}</div>
       </div>
     `).join('');
+
+    // Slideshow sync with text overlay; only first three (no courses)
+    const items = nowData.filter(n => n.id === 'relay' || n.id === 'drfirst' || n.id === 'food');
+    let index = 0;
+    const INTERVAL_MS = 3500;
+
+    const updateActive = () => {
+      // Update visual
+      const cards = visualHost.querySelectorAll('.visual-card');
+      cards.forEach(c => c.classList.remove('active'));
+      const activeVisualId = items[index].id;
+      const classMap = { relay: 'visual-relay', drfirst: 'visual-drfirst', food: 'visual-food' };
+      const activeClass = classMap[activeVisualId];
+      const target = Array.from(cards).find(c => c.classList.contains(activeClass));
+      if (target) target.classList.add('active');
+
+      // Update sliding glass overlay position over text
+      const nowItems = this.container.querySelectorAll('.now-item');
+      const slider = document.getElementById('nowSlider');
+      nowItems.forEach((el, i) => el.classList.toggle('active', i === index));
+      if (slider && nowItems[index]) {
+        const containerRect = this.container.getBoundingClientRect();
+        const itemRect = nowItems[index].getBoundingClientRect();
+        const topOffset = itemRect.top - containerRect.top;
+        slider.style.transform = `translateY(${Math.max(0, topOffset - 8)}px)`;
+        slider.style.height = `${itemRect.height + 16}px`;
+      }
+      index = (index + 1) % items.length;
+    };
+
+    setInterval(updateActive, INTERVAL_MS);
+    updateActive();
+  }
+
+  setupCourseRotators() {
+    const rotators = this.container?.querySelectorAll('.course-rotator');
+    if (!rotators || rotators.length === 0) return;
+    rotators.forEach(rotator => {
+      let courses = [];
+      try {
+        courses = JSON.parse(rotator.getAttribute('data-courses')) || [];
+      } catch (e) { courses = []; }
+      if (courses.length === 0) return;
+
+      const textEl = rotator.querySelector('.course-text');
+      let index = 0;
+      const FADE_MS = 200;
+      const INTERVAL_MS = 2600;
+
+      const show = (i) => {
+        if (!textEl) return;
+        textEl.style.opacity = '0';
+        setTimeout(() => {
+          textEl.textContent = courses[i % courses.length];
+          textEl.style.opacity = '1';
+        }, FADE_MS);
+      };
+
+      // initial
+      textEl.textContent = courses[0];
+      textEl.style.opacity = '1';
+      index = 1;
+      setInterval(() => {
+        show(index);
+        index = (index + 1) % courses.length;
+      }, INTERVAL_MS);
+    });
   }
 }
 
@@ -466,6 +569,9 @@ class App {
 
     // Render hero tech stack row
     this.renderHeroStack();
+
+    // Start rotating hero roles
+    this.startHeroRoles();
   }
 
   renderHeroStack() {
@@ -501,6 +607,40 @@ class App {
       // initial
       updateThumb();
     }
+  }
+
+  startHeroRoles() {
+    const textEl = document.getElementById('heroRoleText');
+    if (!textEl) return;
+
+    const roles = [
+      { label: 'Engineer.', cover: '/assets/roles/engineer.jpg', pos: '50% 50%', filter: 'grayscale(0.2) contrast(1.2) brightness(0.9)' },
+      { label: 'Builder.', cover: '/assets/roles/builder.jpg', pos: '50% 45%', filter: 'grayscale(0.1) contrast(1.2) brightness(0.95)' },
+      { label: 'Researcher.', cover: '/assets/roles/researcher.jpg', pos: '50% 40%', filter: 'grayscale(0.3) contrast(1.25) brightness(0.9)' },
+      { label: 'Musician.', cover: '/assets/roles/musician.jpg', pos: '50% 42%', filter: 'grayscale(0.2) contrast(1.3) brightness(0.92)' },
+      { label: 'Explorer.', cover: '/assets/roles/explorer.jpg', pos: '50% 35%', filter: 'grayscale(0.15) contrast(1.2) brightness(0.95)' }
+    ];
+
+    const INTERVAL = 3000;
+    let i = 0;
+
+    const setRole = (idx) => {
+      const role = roles[idx % roles.length];
+      textEl.style.opacity = '0';
+      textEl.style.transform = 'translateY(6px)';
+      setTimeout(() => {
+        textEl.textContent = role.label;
+        textEl.style.backgroundImage = `url('${role.cover}')`;
+        textEl.style.backgroundPosition = role.pos || '50% 50%';
+        textEl.style.filter = 'none';
+        textEl.style.transform = 'translateY(-6px)';
+        textEl.style.opacity = '1';
+        setTimeout(() => { textEl.style.transform = 'translateY(0)'; }, 150);
+      }, 200);
+    };
+
+    setRole(0);
+    setInterval(() => { i = (i + 1) % roles.length; setRole(i); }, INTERVAL);
   }
 
   setupPageTransitions() {
@@ -912,12 +1052,11 @@ class InteractiveTerminal {
   }
 
   whoami() {
-    this.addOutput('eric_xu - Software Engineer & AI/ML Developer', 'success');
+    this.addOutput('eric_xu - Student @ Brown University', 'success');
     this.addOutput('');
-    this.addOutput('Currently seeking internship opportunities in:', 'text');
-    this.addOutput('• Full-stack development', 'text');
-    this.addOutput('• AI/ML engineering', 'text');
-    this.addOutput('• Software engineering', 'text');
+    this.addOutput('Curious about AI devtools/infra, software engineering, and deep learning models.', 'text');
+    this.addOutput('Built research-driven systems and scalable apps: from novel drug discovery to AI agent workflow frameworks.', 'text');
+    this.addOutput('On the side: cello & piano, gastronomy, and basketball.', 'text');
   }
 
   listCommands() {
@@ -950,9 +1089,9 @@ class InteractiveTerminal {
       case 'about.txt':
         await this.addTypingOutput('# About Eric Xu', 'info');
         await this.addTypingOutput('');
-        await this.addTypingOutput("I'm a passionate software engineer and AI/ML enthusiast with a love for creating elegant solutions to complex problems. My journey in tech started with curiosity about how things work, and has evolved into a deep appreciation for well-crafted software that makes people's lives better.", 'text');
+        await this.addTypingOutput("I’m a student at Brown University curious about AI devtools/infra, software engineering, and deep learning models. I have experience building research-driven systems and scalable applications by leading projects in novel drug discovery to developing new frameworks for AI agent workflows.", 'text');
         await this.addTypingOutput('');
-        await this.addTypingOutput('Currently seeking internship opportunities where I can contribute to innovative projects and continue learning from experienced teams.', 'text');
+        await this.addTypingOutput('On the side, I love playing my cello and piano, exploring gastronomy, and shooting hoops.', 'text');
         break;
 
       case 'skills.json':

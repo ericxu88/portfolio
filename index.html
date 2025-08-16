@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&family=Great+Vibes&family=Anton&display=swap"
         rel="stylesheet">
 
     <!-- Styles -->
@@ -29,7 +29,7 @@
     <!-- Navigation -->
     <nav class="nav" id="nav">
         <div class="nav-container">
-            <a href="#hero" class="nav-logo">EX</a>
+            <a href="#hero" class="nav-logo">Eric Xu</a>
             <div class="nav-links">
                 <!-- Edit links as needed -->
                 <a href="#about" class="nav-link">About</a>
@@ -72,8 +72,10 @@
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1 class="hero-name">Eric Xu</h1>
-                    <p class="hero-tagline">Building delightful, reliable software</p>
+                    <h1 class="hero-name">
+                        <span class="hero-static">Eric Xu. </span>
+                        <span class="role-text text-photo" id="heroRoleText">Engineer.</span>
+                    </h1>
                 </div>
 
                 <!-- Tech Stack -->
@@ -97,9 +99,8 @@
                     <h2 class="section-title">About</h2>
                 </div>
                 <div class="about-content">
-                    <!-- TODO: Replace with your own About content -->
-                    <p class="about-text">[About placeholder] Brief intro about you, your passions, and your focus areas.</p>
-                    <p class="about-text">[About placeholder] What you're looking for (e.g., internships, roles) and what excites you.</p>
+                    <p class="about-text">I’m a student at Brown University curious about AI devtools/infra, software engineering, and deep learning models. I have experience building research-driven systems and scalable applications by leading projects in novel drug discovery to developing new frameworks for AI agent workflows.</p>
+                    <p class="about-text">On the side, I love playing my cello and piano, exploring gastronomy, and shooting hoops.</p>
                 </div>
             </div>
         </div>
@@ -223,8 +224,16 @@
                 <div class="section-header">
                     <h2 class="section-title">Currently</h2>
                 </div>
-                <div class="now-list" id="nowList">
-                    <!-- Now items will be populated by JavaScript -->
+                <div class="now-layout">
+                    <div class="now-list" id="nowList">
+                        <div class="now-slider" id="nowSlider"></div>
+                        <!-- Now items will be populated by JavaScript -->
+                    </div>
+                    <div class="current-visual">
+                        <div class="visual-card visual-relay glass--strong">
+                            <div class="visual-caption">Relay</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
