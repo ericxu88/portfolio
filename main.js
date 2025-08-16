@@ -463,6 +463,44 @@ class App {
     console.log('Portfolio with interactive terminal initialized ✨');
     console.log('Projects container:', document.getElementById('projectsGrid'));
     console.log('Projects data:', projectsData);
+
+    // Render hero tech stack row
+    this.renderHeroStack();
+  }
+
+  renderHeroStack() {
+    const heroStack = document.getElementById('heroStack');
+    const wrap = document.getElementById('heroStackWrap');
+    const thumb = document.getElementById('heroStackThumb');
+    if (!heroStack) return;
+    const groups = [
+      { header: 'Languages:', items: ['Python', 'Java', 'C/C++', 'JavaScript', 'TypeScript', 'Perl', 'SQL'] },
+      { header: 'Developer Tools:', items: ['AWS', 'Git', 'Docker', 'Azure', 'Postman', 'Prisma', 'Supabase'] },
+      { header: 'Libraries/Frameworks:', items: ['Spring Boot', 'FastAPI', 'React.js', 'Node.js', 'Next.js', 'PostgreSQL', 'Pinecone'] }
+    ];
+    heroStack.innerHTML = groups.map(({ header, items }) => {
+      const headerChip = `<span class="tech-chip tech-header">${header}</span>`;
+      const itemChips = items.map(it => `<span class="tech-chip">${it}</span>`).join('');
+      return headerChip + itemChips;
+    }).join('');
+
+    if (wrap && thumb) {
+      const updateThumb = () => {
+        const maxScroll = heroStack.scrollWidth - heroStack.clientWidth;
+        const ratio = heroStack.clientWidth / heroStack.scrollWidth;
+        const trackWidth = wrap.querySelector('.stack-scrollbar').clientWidth;
+        const minThumbPx = 60; // ensure visible
+        const thumbPx = Math.max(minThumbPx, trackWidth * ratio);
+        const maxThumbX = trackWidth - thumbPx;
+        const x = maxScroll > 0 ? (heroStack.scrollLeft / maxScroll) * maxThumbX : 0;
+        thumb.style.width = `${thumbPx}px`;
+        thumb.style.transform = `translateX(${x}px)`;
+      };
+      heroStack.addEventListener('scroll', updateThumb, { passive: true });
+      window.addEventListener('resize', updateThumb);
+      // initial
+      updateThumb();
+    }
   }
 
   setupPageTransitions() {
@@ -510,6 +548,21 @@ class App {
       window.addEventListener('scroll', () => {
         scrollY = window.scrollY;
       }, { passive: true });
+    }
+
+    // Scroll progress bar
+    const progressEl = document.getElementById('scrollProgress');
+    if (progressEl) {
+      const updateProgress = () => {
+        const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        progressEl.style.width = `${progress}%`;
+        const fixed = document.getElementById('scrollProgressFixed');
+        if (fixed) fixed.style.width = `${progress}%`;
+      };
+      window.addEventListener('scroll', updateProgress, { passive: true });
+      updateProgress();
     }
   }
 }
@@ -1144,3 +1197,35 @@ portfolio/
 
 // Start the application
 new App();
+
+// Resume overlay controls
+(function setupResumeOverlay(){
+  const resumeLink = document.getElementById('resumeLink');
+  const resumeOverlay = document.getElementById('resumeOverlay');
+  const resumeClose = document.getElementById('resumeClose');
+  if (resumeLink && resumeOverlay && resumeClose) {
+    resumeLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      resumeOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+    resumeClose.addEventListener('click', () => {
+      resumeOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    resumeOverlay.addEventListener('click', (e) => {
+      if (e.target === resumeOverlay) {
+        resumeOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && resumeOverlay.classList.contains('active')) {
+        resumeOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+})();
+
+// (Removed) Tech Stack section scroller setup
